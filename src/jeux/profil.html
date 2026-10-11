@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mon profil · BIT//ARCADE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="BIT//ARCADE, accueil">
+        <span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        BIT//ARCADE
+      </a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="index.html">Home</a>
+        <a href="jeux.html">Jeux</a>
+        <a href="connexion.html">Connection</a>
+        <a href="profil.html" aria-current="page">Profil</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <p class="eyebrow">Mon compte</p>
+      <h1>Mon profil</h1>
+
+      <hr class="divider">
+
+      <p class="label">Joueur connecté</p>
+      <p class="player" id="pseudo">Pixel_42</p>
+      <p class="lead" style="font-size:11px">Membre depuis janvier 2026</p>
+
+      <hr class="divider">
+
+      <p class="label">Meilleurs scores personnels</p>
+      <div class="grid grid-3">
+        <div class="card score-card">
+          <span class="star" aria-hidden="true">★</span>
+          <h3 class="name">Astro Blaster</h3>
+          <p class="value">12 450</p>
+          <p class="date">14 janv. 2026</p>
+        </div>
+        <div class="card score-card">
+          <span class="star" style="color:#4aa3ff" aria-hidden="true">▶</span>
+          <h3 class="name">Snake Circuit</h3>
+          <p class="value">8 730</p>
+          <p class="date">21 janv. 2026</p>
+        </div>
+        <div class="card score-card">
+          <span class="star" aria-hidden="true">⊡</span>
+          <h3 class="name">Brick Breaker</h3>
+          <p class="value">5 210</p>
+          <p class="date">3 févr. 2026</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <button class="btn" id="logout" type="button">Se déconnecter</button>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <span>© 2026 BIT//ARCADE · Projet étudiant.</span>
+      <span class="file">profil.html</span>
+    </div>
+  </footer>
+  <script>
+    // Affiche le pseudo enregistré à la connexion (clé "pseudo"), sinon garde la valeur par défaut.
+    try {
+      const pseudo = localStorage.getItem('pseudo');
+      if (pseudo) document.getElementById('pseudo').textContent = pseudo;
+    } catch (e) {}
+
+    document.getElementById('logout').addEventListener('click', () => {
+      try { localStorage.removeItem('pseudo'); } catch (e) {}
+      window.location.href = 'connexion.html';
+    });
+  </script>
+</body>
+</html>
