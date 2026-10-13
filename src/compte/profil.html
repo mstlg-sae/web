@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mon profil · BIT//ARCADE</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./../assets/style.css">
 </head>
 <body>
   <header class="site-header">
@@ -14,11 +14,11 @@
         BIT//ARCADE
       </a>
       <nav class="nav" aria-label="Navigation principale">
-        <a href="index.html">Home</a>
+        <a href="./../index.html">Home</a>
         <a href="jeux.html">Jeux</a>
         <a href="connexion.html">Connection</a>
         <a href="profil.html" aria-current="page">Profil</a>
-        <a href="about.html">About</a>
+        <a href="./../about/index.html">About</a>
       </nav>
     </div>
   </header>
@@ -68,17 +68,5 @@
       <span class="file">profil.html</span>
     </div>
   </footer>
-  <script>
-    // Affiche le pseudo enregistré à la connexion (clé "pseudo"), sinon garde la valeur par défaut.
-    try {
-      const pseudo = localStorage.getItem('pseudo');
-      if (pseudo) document.getElementById('pseudo').textContent = pseudo;
-    } catch (e) {}
-
-    document.getElementById('logout').addEventListener('click', () => {
-      try { localStorage.removeItem('pseudo'); } catch (e) {}
-      window.location.href = 'connexion.html';
-    });
-  </script>
 </body>
 </html>
