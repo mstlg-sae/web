@@ -417,6 +417,15 @@ h1 {
   padding: 16px 40px;
 }
 
+.bouton.indisponible {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 
 /* ---------------------------------------------------------
    09. FORMULAIRES
