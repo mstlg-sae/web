@@ -599,3 +599,123 @@ footer .page::before {
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* ---------------------------------------------------------
+   13. DESIGN UNIFIÉ — toutes les pages
+   --------------------------------------------------------- */
+html { scroll-behavior: smooth; }
+
+/* Un seul conteneur visuel, même si les pages historiques
+   utilisent encore .container ou .conteneur. */
+.container, .conteneur {
+  width: min(1180px, calc(100% - 40px));
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+header, .site-header {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+  background: rgba(15, 16, 21, .96);
+}
+header .container, header .conteneur, .site-header .container, .site-header .conteneur {
+  min-height: 88px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 16px;
+}
+
+.logo { gap: 12px; flex-shrink: 0; }
+.logo img { width: 44px; height: 44px; object-fit: contain; }
+.logo span, .logo { font-size: 15px; }
+
+nav, .nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+nav a, .nav a {
+  display: inline-block;
+  padding: 9px 12px;
+  color: var(--muted);
+  font-size: 13px;
+  border: 1px solid transparent;
+  transition: color .15s, background .15s, border-color .15s;
+}
+nav a:hover, .nav a:hover { color: var(--text); border-color: var(--line); }
+nav a.actif, .nav a[aria-current="page"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  padding: 9px 12px;
+  margin: 0;
+}
+.nav a[aria-current="page"]::before { content: none; }
+
+main > .container, main.container, main > .conteneur, main > .formulaire {
+  padding-block: 56px;
+}
+main > .conteneur { padding-block: 0; }
+.blocprincipal { padding: clamp(64px, 10vw, 112px) 0; }
+.blocprincipal h1 { margin-bottom: 20px; }
+.blocprincipal h1 + h1 { margin-top: -16px; }
+.blocprincipal p:not(.etiquette):not(.eyebrow) { margin-top: 12px; }
+.selection { padding: 56px 0 80px; }
+
+/* Cartes, formulaires et boutons partagent les mêmes finitions. */
+.card, .blocjeux { min-width: 0; height: 100%; }
+.card { padding: 20px; }
+.blocjeux { padding: 24px; transition: border-color .15s, transform .15s; }
+.blocjeux:hover { border-color: var(--accent); transform: translateY(-2px); }
+.bouton, .btn { min-height: 46px; border-radius: 2px; }
+.formulaire { width: min(100% - 40px, 480px); padding: 56px 0 72px; }
+.formulaire h1 { margin-top: 8px; }
+.champ input { border-width: 1px; border-radius: 2px; }
+.note-player { color: var(--muted); font-size: 11px; margin-top: 8px; }
+
+footer, .site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+footer .container, footer .conteneur, .site-footer .container, .site-footer .conteneur {
+  min-height: 72px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-block: 20px;
+}
+footer .page::before, .site-footer .file::before { width: 6px; height: 6px; margin-right: 8px; }
+
+@media (max-width: 900px) {
+  header .container, header .conteneur, .site-header .container, .site-header .conteneur {
+    flex-direction: column; justify-content: center; gap: 12px; padding-block: 18px;
+  }
+  nav, .nav { justify-content: center; }
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-3, .bloc { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .container, .conteneur { width: calc(100% - 32px); }
+  nav, .nav { width: 100%; gap: 4px; }
+  nav a, .nav a { padding: 8px 9px; font-size: 12px; }
+  h1 { font-size: clamp(28px, 9vw, 38px); overflow-wrap: anywhere; }
+  .grid-4, .grid-3, .bloc { grid-template-columns: 1fr; }
+  main > .container, main.container, main > .conteneur { padding-block: 36px; }
+  .blocprincipal { padding: 56px 0; }
+  .selection { padding: 36px 0 52px; }
+  .formulaire { width: calc(100% - 32px); padding-block: 36px 48px; }
+  footer .container, footer .conteneur, .site-footer .container, .site-footer .conteneur { justify-content: center; text-align: center; }
+}
+
+

@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Connection - BIT//ARCADE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connexion · BIT//ARCADE</title>
   <link rel="stylesheet" href="./../assets/style.css">
 </head>
 <body>
@@ -15,9 +16,8 @@
       <nav>
         <a href="./../index.html">Accueil</a>
         <a href="./../jeux/index.html">Jeux</a>
-        <a href="connection.html" class="actif">Connection</a>
+        <a href="index.html" class="actif">Connexion</a>
         <a href="profil.html">Profil</a>
-        <a href="./../about/index.html">A propos</a>
       </nav>
     </div>
   </header>
@@ -26,12 +26,12 @@
       <form class="formulaire" action="#" method="post">
         <h1>Connexion.</h1>
         <div class="champ">
-          <label>Identifiant</label>
+          <label for="identifiant">Identifiant</label>
           <input type="text" id="identifiant" name="identifiant" required>
         </div>
         <div class="champ">
-          <label>Mot de passe</label>
-          <input type="text" id="mdp" name="mdp" required>
+          <label for="mdp">Mot de passe</label>
+         <input type="password" id="mdp" name="mdp" required>
         </div>
         <button class="bouton" type="submit" style="width:100%">Se connecter</button>
         <p class="bas">Pas de compte ? <a href="inscription.html">Créer un compte</a></p>
@@ -41,7 +41,7 @@
   <footer>
     <div class="conteneur">
       <span>BIT//ARCADE</span>
-      <span class="page">connection.html</span>
+      <span class="page">compte/index.html</span>
     </div>
   </footer>
 </body>
