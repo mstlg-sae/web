@@ -36,6 +36,24 @@
         <button class="bouton" type="submit" style="width:100%">Se connecter</button>
         <p class="bas">Pas de compte ? <a href="inscription.html">Créer un compte</a></p>
       </form>
+      <?php
+      
+      if(isset($_GET['error'])){
+        echo "<div class='error'>";
+        if ($_GET['error']=="login") {
+          // affichage d'un message d'erreur en cas d'identifiant invalide
+          echo "Le identifiant fournis ne sont pas valide"
+        } elseif ($_GET['error']=="no_request") {
+          // affichage d'un message d'erreur en cas de requètes d'authentification vide
+          echo "Les champs de nom d'utilisateur et de mot de passe doivent être fournis pour se connecter"
+        } else {
+          // erreur générique
+          echo "Un erreur lors de la connection est survenu"
+        }
+        
+        echo "</div>"
+      }
+      ?>
     </div>
   </main>
   <footer>
@@ -46,3 +64,6 @@
   </footer>
 </body>
 </html>
+<?php
+
+?>
