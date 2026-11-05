@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <?php
+  include("./../function/php_lib.php");
+  is_logged_redirect("./index.php?error=no_session")
+  ?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mon profil · BIT//ARCADE</title>

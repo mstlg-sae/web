@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <?php
+  include("./../function/php_lib.php");
+  is_logged_redirect("./index.php")
+  ?>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mon profil · BIT//ARCADE</title>
+  <link rel="stylesheet" href="./../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="./../index.html" aria-label="BIT//ARCADE, accueil">
+        <img src="./../assets/logo.png" alt="Logo BIT//ARCADE">
+        BIT//ARCADE
+      </a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="./../index.html">Accueil</a>
+        <a href="./../jeux/index.html">Jeux</a>
+        <a href="index.html">Connexion</a>
+        <a href="profil.html" aria-current="page">Profil</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <p class="eyebrow">Mon compte</p>
+      <h1>Mon profil</h1>
+
+      <hr class="divider">
+
+      <p class="label">Joueur connecté</p>
+      <p class="player" id="pseudo">%USERNAME%</p>
+      <p class="note_player" class="note-player">NOTE : Cette page n'est censé être visible que pour les utilisateur connectées</p>
+      <hr class="divider">
+
+      <p class="label">Meilleurs scores personnels</p>
+      <div class="grid grid-3">
+        <div class="card score-card">
+          <span class="star" aria-hidden="true">★</span>
+          <h3 class="name">Astro Blaster</h3>
+          <p class="value">12 450</p>
+          <p class="date">14 janv. 2026</p>
+        </div>
+        <div class="card score-card">
+          <span class="star" style="color:#4aa3ff" aria-hidden="true">▶</span>
+          <h3 class="name">Snake Circuit</h3>
+          <p class="value">8 730</p>
+          <p class="date">21 janv. 2026</p>
+        </div>
+        <div class="card score-card">
+          <span class="star" aria-hidden="true">⊡</span>
+          <h3 class="name">Brick Breaker</h3>
+          <p class="value">5 210</p>
+          <p class="date">3 févr. 2026</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <button class="btn" id="logout" type="button">Se déconnecter</button>
+      # note mettre un logout.php quand il sera fini + 
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <span>BIT//ARCADE</span>
+      <span class="file">compte\profil.html</span>
+    </div>
+  </footer>
+</body>
+</html>

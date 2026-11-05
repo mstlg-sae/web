@@ -1,5 +1,14 @@
 <?php
 session_start();
 session_destroy();
-header("location: ./../index.html");
+# option de redirection si besoin pour les deconnection
+if (isset($_GET['redirect']) && $_GET['redirect'] == TRUE) {
+    if (isset($_GET['location'])) {
+        $location = $_GET['location'];
+    } else {
+        $location = "./../index.html";
+    }
+    header("location: ".$location);
+}
+
 ?>

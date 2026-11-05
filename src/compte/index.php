@@ -16,8 +16,8 @@
       <nav>
         <a href="./../index.html">Accueil</a>
         <a href="./../jeux/index.html">Jeux</a>
-        <a href="index.html" class="actif">Connexion</a>
-        <a href="profil.html">Profil</a>
+        <a href="index.php" class="actif">Connexion</a>
+        <a href="profil.php">Profil</a>
       </nav>
     </div>
   </header>
@@ -34,24 +34,31 @@
          <input type="password" id="mdp" name="mdp" required>
         </div>
         <button class="bouton" type="submit" style="width:100%">Se connecter</button>
-        <p class="bas">Pas de compte ? <a href="inscription.html">Créer un compte</a></p>
+        <p class="bas">Pas de compte ? <a href="inscription.php">Créer un compte</a></p>
       </form>
       <?php
       
       if(isset($_GET['error'])){
-        echo "<div class='error'>";
-        if ($_GET['error']=="login") {
+        echo "<div class='error'><p class='error_text'>";
+        if ($_GET['error']=="wrong_login") {
           // affichage d'un message d'erreur en cas d'identifiant invalide
-          echo "Le identifiant fournis ne sont pas valide"
+          echo "Le identifiant fournis ne sont pas valide";
         } elseif ($_GET['error']=="no_request") {
+          // affichage d'un message d'erreur en cas de requètes d'authentification invalide
+          // -> connection effectué mais requète invalide
+          echo "Les champs de nom d'utilisateur et de mot de passe doivent être fournis pour se connecter";
+        }elseif ($_GET['error']=="no_role"){
+          // Erreur en cas d'acquisition du rôle lors de la connection
+          echo "Le rôle n'a pas pu être charger lors la connection, veuillez contacter un administrateur" ;
+        }elseif ($_GET['error']=="no_session"){
           // affichage d'un message d'erreur en cas de requètes d'authentification vide
-          echo "Les champs de nom d'utilisateur et de mot de passe doivent être fournis pour se connecter"
+          // -> tentative d'accès à un page pour personne connecté sans connection
+          echo "Vous devez être connecté pour accèder à cette page" ;
         } else {
           // erreur générique
-          echo "Un erreur lors de la connection est survenu"
+          echo "Un erreur lors de la connection est survenu";
         }
-        
-        echo "</div>"
+        echo "</p><br><p class='error_code'>Code de l'erreur : '".$_GET['error']."'</p></div>";
       }
       ?>
     </div>

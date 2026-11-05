@@ -16,8 +16,8 @@
       <nav>
         <a href="./../index.html">Accueil</a>
         <a href="./../jeux/index.html">Jeux</a>
-        <a href="./index.html" class="actif">Connexion</a>
-        <a href="profil.html">Profil</a>
+        <a href="./index.php" class="actif">Connexion</a>
+        <a href="profil.php">Profil</a>
       </nav>
     </div>
   </header>
@@ -43,7 +43,7 @@
           <input type="password" id="mdp2" name="mdp2">
         </div>
         <button class="bouton" type="submit" style="width:100%">Créer mon compte →</button>
-        <p class="bas">Déjà un compte ? <a href="index.html">Se connecter</a></p>
+        <p class="bas">Déjà un compte ? <a href="index.php">Se connecter</a></p>
       </form>
     </div>
   </main>
