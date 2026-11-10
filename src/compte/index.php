@@ -23,7 +23,7 @@
   </header>
   <main>
     <div class="conteneur">
-      <form class="formulaire" action="#" method="post">
+      <form class="formulaire" action="login-action.php" method="post">
         <h1>Connexion.</h1>
         <div class="champ">
           <label for="identifiant">Identifiant</label>
