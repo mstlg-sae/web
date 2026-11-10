@@ -82,7 +82,7 @@ function profil_page_onlogged($login_page_location){
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    if (isset($_SESSION['login'] && isset($_SESSION['role']))) {
+    if (isset($_SESSION['login']) && isset($_SESSION['role'])) {
         if ($_SESSION['role'] == 'adminsys'){
             header("Location: " . $login_page_location."adminsys.php");
         } elseif ($_SESSION['role'] == 'adminweb'){

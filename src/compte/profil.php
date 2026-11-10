@@ -62,8 +62,7 @@
 
       <hr class="divider">
 
-      <button class="btn" id="logout" type="button">Se déconnecter</button>
-      # note mettre un logout.php quand il sera fini + 
+      <button class="btn" id="logout" type="button"><a class="btn" href="logout.php?redirect=1&location=./index.php">Se déconnecter</a></button>
     </div>
   </main>
   <footer class="site-footer">
