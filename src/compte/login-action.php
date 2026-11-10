@@ -45,8 +45,8 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
                 }
             } else {
                 disconnect($connect);
-                #header("Location: index.php?error=wrong_login");
-                #exit;
+                header("Location: index.php?error=wrong_login");
+                exit;
             }
         } else {
             disconnect($connect);
