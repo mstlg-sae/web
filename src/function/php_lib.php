@@ -103,11 +103,11 @@ function right_profil_page($login_page_location,$role_required){
         session_start();
     }
     if (isset($_SESSION['login']) && isset($_SESSION['role'])) {
-        if ($_SESSION['role'] == 'adminsys' && $role_required != 'adminsys'){
+        if ($_SESSION['role'] != 'adminsys' && $role_required == 'adminsys'){
             header("Location: " . $login_page_location."adminsys.php");
-        } elseif ($_SESSION['role'] == 'adminweb' && $role_required != 'adminweb'){
+        } elseif ($_SESSION['role'] != 'adminweb' && $role_required == 'adminweb'){
             header("Location: " . $login_page_location."adminweb.php");
-        } elseif($_SESSION['role'] == 'adminweb' && $role_required != 'user'){
+        } elseif($_SESSION['role'] != 'adminweb' && $role_required == 'user'){
             header("Location: " . $login_page_location."profil.php");
             
         }
