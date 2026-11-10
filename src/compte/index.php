@@ -26,8 +26,8 @@
       <form class="formulaire" action="login-action.php" method="post">
         <h1>Connexion.</h1>
         <div class="champ">
-          <label for="identifiant">Identifiant</label>
-          <input type="text" id="identifiant" name="identifiant" required>
+          <label for="login">Identifiant</label>
+          <input type="text" id="login" name="identifiant" required>
         </div>
         <div class="champ">
           <label for="mdp">Mot de passe</label>
