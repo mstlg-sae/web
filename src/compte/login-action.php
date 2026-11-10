@@ -1,6 +1,6 @@
 <?php
 include("./../function/php_lib.php");
-if (isset($_POST["mdp"])&& isset($_POST["login"])){
+if (isset($_POST["mdp"]) && isset($_POST["login"])){
     $base = "sae";
     $table_user = "Users";
     $table_role = "role";
@@ -51,6 +51,7 @@ if (isset($_POST["mdp"])&& isset($_POST["login"])){
         header("Location: index.php?error=no_db_available");
     }
 } else {
+    header("Location: index.php?error=".$_POST["mdp"].$_POST["login"]);
     header("Location: index.php?error=no_request");
 }
 
