@@ -14,13 +14,13 @@
 <body>
   <header class="site-header">
     <div class="container">
-      <a class="logo" href="./../index.html" aria-label="BIT//ARCADE, accueil">
+      <a class="logo" href="./../index.php" aria-label="BIT//ARCADE, accueil">
         <img src="./../assets/logo.png" alt="Logo BIT//ARCADE">
         BIT//ARCADE
       </a>
       <nav class="nav" aria-label="Navigation principale">
-        <a href="./../index.html">Accueil</a>
-        <a href="./../jeux/index.html">Jeux</a>
+        <a href="./../index.php">Accueil</a>
+        <a href="./../jeux/index.php">Jeux</a>
         <?php
         inject_profil_button("./");
         ?>
@@ -69,7 +69,7 @@
   <footer class="site-footer">
     <div class="container">
       <span>BIT//ARCADE</span>
-      <span class="file">compte\profil.html</span>
+      <span class="file">compte\profil.php</span>
     </div>
   </footer>
 </body>

@@ -1,3 +1,8 @@
+<?php
+session_start();
+include("./../function/php_lib.php");
+profil_page_onlogged("");
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,15 +14,16 @@
 <body>
   <header>
     <div class="conteneur">
-      <a class="logo" href="./../index.html">
+      <a class="logo" href="./../index.php">
         <img src="./../assets/logo.png" alt="Logo BIT//ARCADE">
         <span>BIT//ARCADE</span>
       </a>
       <nav>
-        <a href="./../index.html">Accueil</a>
-        <a href="./../jeux/index.html" class="actif">Jeux</a>
-        <a href="./../compte/index.php">Connexion</a>
-        <a href="./../compte/profil.php">Profil</a>
+        <a href="./../index.php">Accueil</a>
+        <a href="./../jeux/index.php" class="actif">Jeux</a>
+        <?php
+        inject_profil_button("./");
+        ?>
       </nav>
     </div>
   </header>

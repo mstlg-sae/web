@@ -14,13 +14,13 @@ profil_page_onlogged("");
 <body>
   <header>
     <div class="conteneur">
-      <a class="logo" href="./../index.html">
+      <a class="logo" href="./../index.php">
         <img src="./../assets/logo.png" alt="Logo BIT//ARCADE">
         <span>BIT//ARCADE</span>
       </a>
       <nav>
-        <a href="./../index.html">Accueil</a>
-        <a href="./../jeux/index.html">Jeux</a>
+        <a href="./../index.php">Accueil</a>
+        <a href="./../jeux/index.php">Jeux</a>
         <?php
         inject_profil_button("./");
         ?>
@@ -72,7 +72,7 @@ profil_page_onlogged("");
   <footer>
     <div class="conteneur">
       <span>BIT//ARCADE</span>
-      <span class="page">compte/index.html</span>
+      <span class="page">compte/index.php</span>
     </div>
   </footer>
 </body>
