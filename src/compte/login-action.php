@@ -8,7 +8,7 @@ if (isset($_POST["mdp"])&& isset($_POST["login"])){
     $password_hash = md5($_POST["mdp"]);
     $sql_request = "SELECT * FROM ".$table_user." WHERE login='".$login."' AND password='".$password_hash."'";
     $sql_request_role = "SELECT role from ".$table_role." WHERE login='".$login."'";
-    $connect = connecter("localhost","root","");
+    $connect = silent_connecter("localhost","root","");
     $db = mysqli_select_db($connect, $base);
     $rq = mysqli_query($connect, $sql_request);
     $rq_role = mysqli_query($connect, $sql_request_role);
