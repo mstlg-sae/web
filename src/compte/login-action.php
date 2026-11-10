@@ -1,20 +1,19 @@
 <?php
 include("./../function/php_lib.php");
-if (isset($_POST["mdp"] && $_POST["login"])){
+if (isset($_POST["mdp"])&& isset($_POST["login"])){
     $base = "sae";
     $table_user = "Users";
     $table_role = "role";
     $login = $_POST["login"];
     $password_hash = md5($_POST["mdp"]);
     $sql_request = "SELECT * FROM ".$table_user." WHERE login='".$login."' AND password='".$password_hash."'";
-    $sql_request_role = "SELECT role from ".$table_role." WHERE login=".$login;
+    $sql_request_role = "SELECT role from ".$table_role." WHERE login='".$login."'";
     $connect = connecter("localhost","root","");
     $db = mysqli_select_db($connect, $base);
     $rq = mysqli_query($connect, $sql_request);
-    $rq_role = mysqli_query($connect, $sql_request);
+    $rq_role = mysqli_query($connect, $sql_request_role);
     if ($db){
         while ($actual_user = mysqli_fetch_row($rq)) {
-            echo "<br>";
             if ($actual_user[0] == $login && $actual_user[1] == $password_hash) {
                 session_start();
                 $_SESSION["login"] = $login;
@@ -24,9 +23,9 @@ if (isset($_POST["mdp"] && $_POST["login"])){
         }
         if (session_status() == PHP_SESSION_ACTIVE){
             # connection reussie -> Acquisition du rôle de l'utilisateur et renvoie sur sa page de rôle
-            $actual_role = mysqli_fetch_row($rq_role)
+            $actual_role = mysqli_fetch_row($rq_role);
             if ($actual_role != NULL) {
-                $_SESSION['role'] = $actual_role;
+                $_SESSION['role'] = $actual_role[0];
                 if (isset($_SESSION['role'])){
                     # Note j'utilise $actual_role car les deux sont les meme et c'ets plus facile a écrire
                     if ($actual_role=='adminsys')
