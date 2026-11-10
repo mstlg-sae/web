@@ -1,7 +1,7 @@
   <?php
   include("./../function/php_lib.php");
   is_logged_redirect("./index.php?error=no_session");
-  right_profil_page("./","adminweb");
+  right_profil_page("./","adminsys");
   ?>
 <!DOCTYPE html>
 <html lang="fr">
