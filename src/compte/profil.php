@@ -1,10 +1,11 @@
+  <?php
+  include("./../function/php_lib.php");
+  is_logged_redirect("./index.php?error=no_session");
+  ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <?php
-  include("./../function/php_lib.php");
-  is_logged_redirect("./index.php?error=no_session")
-  ?>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mon profil · BIT//ARCADE</title>
@@ -13,15 +14,16 @@
 <body>
   <header class="site-header">
     <div class="container">
-      <a class="logo" href="./../index.html" aria-label="BIT//ARCADE, accueil">
+      <a class="logo" href="./../index.php" aria-label="BIT//ARCADE, accueil">
         <img src="./../assets/logo.png" alt="Logo BIT//ARCADE">
         BIT//ARCADE
       </a>
       <nav class="nav" aria-label="Navigation principale">
-        <a href="./../index.html">Accueil</a>
-        <a href="./../jeux/index.html">Jeux</a>
-        <a href="index.html">Connexion</a>
-        <a href="profil.html" aria-current="page">Profil</a>
+        <a href="./../index.php">Accueil</a>
+        <a href="./../jeux/index.php">Jeux</a>
+        <?php
+        inject_profil_button("./");
+        ?>
       </nav>
     </div>
   </header>
@@ -33,7 +35,7 @@
       <hr class="divider">
 
       <p class="label">Joueur connecté</p>
-      <p class="player" id="pseudo">%USERNAME%</p>
+      <p class="player" id="pseudo"><?php echo htmlspecialchars($_SESSION['login'])?></p>
       <p class="note_player" class="note-player">NOTE : Cette page n'est censé être visible que pour les utilisateur connectées</p>
       <hr class="divider">
 
@@ -61,14 +63,13 @@
 
       <hr class="divider">
 
-      <button class="btn" id="logout" type="button">Se déconnecter</button>
-      # note mettre un logout.php quand il sera fini + 
+      <a class="btn" href="logout.php?redirect=1&location=./index.php">Se déconnecter</a>
     </div>
   </main>
   <footer class="site-footer">
     <div class="container">
       <span>BIT//ARCADE</span>
-      <span class="file">compte\profil.html</span>
+      <span class="file">compte\profil.php</span>
     </div>
   </footer>
 </body>

@@ -1,3 +1,7 @@
+<?php
+session_start();
+include("./function/php_lib.php");
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,15 +13,16 @@
 <body>
   <header>
     <div class="conteneur">
-      <a class="logo" href="index.html">
+      <a class="logo" href="index.php">
         <img src="./assets/logo.png" alt="Logo BIT//ARCADE">
         <span>BIT//ARCADE</span>
       </a>
       <nav>
-        <a href="index.html" class="actif">Accueil</a>
-        <a href="./jeux/index.html">Jeux</a>
-        <a href="./compte/index.php">Connexion</a>
-        <a href="./compte/profil.php">Profil</a>
+        <a href="index.php" class="actif">Accueil</a>
+        <a href="./jeux/index.php">Jeux</a>
+        <?php
+        inject_profil_button("./compte/");
+        ?>
         
       </nav>
     </div>
@@ -28,14 +33,14 @@
         <p class="etiquette">Bienvenue</p>
         <h1>Parcourt la liste et choissant un<br>Et profite</h1>
         <p>Viens jouez a nos jeux</p>
-        <a class="bouton" href="./jeux/index.html">Voir les jeux</a>
+        <a class="bouton" href="./jeux/index.php">Voir les jeux</a>
       </div>
     </section>
   </main>
   <footer>
     <div class="conteneur">
       <span>BIT//ARCADE</span>
-      <span class="page">index.html</span>
+      <span class="page">index.php</span>
     </div>
   </footer>
 </body>
