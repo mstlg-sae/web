@@ -52,7 +52,7 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
     }
 } else {
     header("Location: index.php?error=".$_POST["mdp"].$_POST["login"]);
-    header("Location: index.php?error=no_request");
+    #header("Location: index.php?error=no_request");
 }
 
 ?>
