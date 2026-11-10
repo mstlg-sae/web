@@ -27,9 +27,10 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
                 $_SESSION['role'] = $actual_role[0];
                 if (isset($_SESSION['role'])){
                     # Note j'utilise $actual_role car les deux sont les meme et c'ets plus facile a écrire
-                    if ($actual_role[0]=='adminsys')
+                    if ($actual_role[0]=='adminsys'){
                         header("Location: adminsys.php");
                         exit;
+                    }
                     elseif ($actual_role[0]=='adminweb'){
                         header("Location: adminweb.php");
                         exit;

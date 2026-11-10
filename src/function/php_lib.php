@@ -27,7 +27,7 @@ function connecter_debug($host=NULL, $user=NULL, $pass=NULL){
         echo "<p>numéro de l'erreur ".mysqli_connect_errno()."</p>";
         echo "<p>erreur : ".mysqli_connect_error()."</p>";
     }
-    mysqli_set_charset($connection, "utf8mb4")
+    mysqli_set_charset($connection, "utf8mb4");
     return $connection;
 }
 function disconnect_debug($connection=NULL){
@@ -55,7 +55,7 @@ function connecter($host=NULL, $user=NULL, $pass=NULL){
     else{
         $connection = @mysqli_connect($host, $user, $pass);
     }
-    mysqli_set_charset($connection, "utf8mb4")
+    mysqli_set_charset($connection, "utf8mb4");
     return $connection;
 }
 function is_logged_redirect($login_page_location){
