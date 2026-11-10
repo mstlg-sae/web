@@ -77,7 +77,9 @@ function is_logged(){
 }
 function inject_profil_button($compte_location){
     if (is_logged()==1){
+        $text = 'Profil';
         if ($_SESSION['role']=='adminsys'){
+            
             $page = $compte_location.'adminsys.php';
         } elseif($_SESSION['role']=='adminweb'){
             $page = $compte_location.'adminweb.php';
@@ -86,9 +88,10 @@ function inject_profil_button($compte_location){
         }
         
     } else {
+        $text = 'Connection';
         $page = $compte_location.'index.php';
     }
-    echo "<a href='".$page."'>Profil</a>";
+    echo "<a href='".$page."'>".$text."</a>";
 }
 function is_logged_redirect($login_page_location){
     # Fonction qui renvoie sur la page de connection si l'utilisateur n'est pas connecter, 
