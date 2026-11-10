@@ -9,50 +9,52 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
     $sql_request = "SELECT * FROM ".$table_user." WHERE login='".$login."' AND password='".$password_hash."'";
     $sql_request_role = "SELECT role from ".$table_role." WHERE login='".$login."'";
     $connect = connecter("localhost","root","!sae26!");
-    if ($db){
+    if ($connect){
         $db = mysqli_select_db($connect, $base);
-        $rq = mysqli_query($connect, $sql_request);
-        $rq_role = mysqli_query($connect, $sql_request_role);
-        while ($actual_user = mysqli_fetch_row($rq)) {
-            if ($actual_user[0] == $login && $actual_user[1] == $password_hash) {
-                session_start();
-                $_SESSION["login"] = $login;
-                break;
-            }
-        }
-        if (session_status() == PHP_SESSION_ACTIVE){
-            # connection reussie -> Acquisition du rôle de l'utilisateur et renvoie sur sa page de rôle
-            $actual_role = mysqli_fetch_row($rq_role);
-            if ($actual_role != NULL) {
-                $_SESSION['role'] = $actual_role[0];
-                if (isset($_SESSION['role'])){
-                    # Note j'utilise $actual_role car les deux sont les meme et c'ets plus facile a écrire
-                    if ($actual_role[0]=='adminsys'){
-                        header("Location: adminsys.php");
-                        exit;
-                    }
-                    elseif ($actual_role[0]=='adminweb'){
-                        header("Location: adminweb.php");
-                        exit;
-                    } else {
-                        header("Location: profil.php");
-                        exit;
-                    }
+        if ($db){
+            $rq = mysqli_query($connect, $sql_request);
+            $rq_role = mysqli_query($connect, $sql_request_role);
+            while ($actual_user = mysqli_fetch_row($rq)) {
+                if ($actual_user[0] == $login && $actual_user[1] == $password_hash) {
+                    session_start();
+                    $_SESSION["login"] = $login;
+                    break;
                 }
-            } else {
-                # cas de l'echec du chargement du rôle, on deconnect puis renvoie erreur sur la page de connection ( Connection incomplète )
-                # Chargement du code la page de deconnection mais sans un double renvoie logout.php -> index.php
-                include("./logout.php");
-                # renvoie page de connection avec erreur dédié
-                header("Location: index.php?error=no_role");
-                exit;
             }
+            if (session_status() == PHP_SESSION_ACTIVE){
+                # connection reussie -> Acquisition du rôle de l'utilisateur et renvoie sur sa page de rôle
+                $actual_role = mysqli_fetch_row($rq_role);
+                if ($actual_role != NULL) {
+                    $_SESSION['role'] = $actual_role[0];
+                    if (isset($_SESSION['role'])){
+                        # Note j'utilise $actual_role car les deux sont les meme et c'ets plus facile a écrire
+                        if ($actual_role[0]=='adminsys'){
+                            header("Location: adminsys.php");
+                            exit;
+                        }
+                        elseif ($actual_role[0]=='adminweb'){
+                            header("Location: adminweb.php");
+                            exit;
+                        } else {
+                            header("Location: profil.php");
+                            exit;
+                        }
+                    
+                } else {
+                    # cas de l'echec du chargement du rôle, on deconnect puis renvoie erreur sur la page de connection ( Connection incomplète )
+                    # Chargement du code la page de deconnection mais sans un double renvoie logout.php -> index.php
+                    include("./logout.php");
+                    # renvoie page de connection avec erreur dédié
+                    header("Location: index.php?error=no_role");
+                    exit;
+                }
+                }
         } else {
             disconnect($connect);
             header("Location: index.php?error=wrong_login");
             exit;
         }
-        
+        }
     } else {
         header("Location: index.php?error=no_db_available");
         exit;
