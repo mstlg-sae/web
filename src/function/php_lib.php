@@ -63,6 +63,33 @@ function connecter($host=NULL, $user=NULL, $pass=NULL){
    
     return $connection;
 }
+function is_logged(){
+    # Fonction qui renvoie sur la page de connection si l'utilisateur n'est pas connecter, 
+    # INPUT
+    # $login_page_location = Position de la page de connection par rapport à l'appel de la fonciton
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (isset($_SESSION['login'])) {
+        return 1;
+    }
+    return 0;
+}
+function inject_profil_button($compte_location){
+    if (is_logged()==1){
+        if ($_SESSION['role']=='adminsys'){
+            $page = $compte_location.'adminsys.php';
+        } elseif($_SESSION['role']=='adminweb'){
+            $page = $compte_location.'adminweb.php';
+        } else {
+            $page = $compte_location.'profil.php';
+        }
+        
+    } else {
+        $page = $compte_location.'index.php';
+    }
+    echo "<a href='".$page."'>Profil</a>";
+}
 function is_logged_redirect($login_page_location){
     # Fonction qui renvoie sur la page de connection si l'utilisateur n'est pas connecter, 
     # INPUT
@@ -75,7 +102,7 @@ function is_logged_redirect($login_page_location){
         exit;
     }
 }
-function profil_page_onlogged($login_page_location){
+function profil_page_onlogged($compte_location){
     # Fonction qui renvoie sur la page de compte si l'utilisateur est connectée, 
     # INPUT
     # $login_page_location = Position du dossier de compte du site
@@ -84,11 +111,11 @@ function profil_page_onlogged($login_page_location){
     }
     if (isset($_SESSION['login']) && isset($_SESSION['role'])) {
         if ($_SESSION['role'] == 'adminsys'){
-            header("Location: " . $login_page_location."adminsys.php");
+            header("Location: " . $compte_location."adminsys.php");
         } elseif ($_SESSION['role'] == 'adminweb'){
-            header("Location: " . $login_page_location."adminweb.php");
+            header("Location: " . $compte_location."adminweb.php");
         } else{
-            header("Location: " . $login_page_location."profil.php");
+            header("Location: " . $compte_location."profil.php");
             
         }
         exit;

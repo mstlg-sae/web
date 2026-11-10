@@ -15,9 +15,6 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
             $sql_request_role = "SELECT role from ".$table_role." WHERE username='".$login."'";
             $rq = mysqli_query($connect, $sql_request);
             $rq_role = mysqli_query($connect, $sql_request_role);
-            echo "DEBUG rq="; var_dump($rq);
-            echo "DEBUG mysqli_error="; var_dump(mysqli_error($connect));
-            echo "DEBUG num_rows="; var_dump(mysqli_num_rows($rq));
             $actual_user = $rq ? mysqli_fetch_row($rq) : NULL;
             if ($actual_user != NULL){
                 $_SESSION["login"] = $login;

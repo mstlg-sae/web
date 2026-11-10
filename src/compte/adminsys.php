@@ -1,4 +1,5 @@
   <?php
+  session_start();
   include("./../function/php_lib.php");
   is_logged_redirect("./index.php?error=no_session");
   right_profil_page("./","adminsys");
@@ -22,8 +23,9 @@
       <nav class="nav" aria-label="Navigation principale">
         <a href="./../index.html">Accueil</a>
         <a href="./../jeux/index.html">Jeux</a>
-        <a href="index.php">Connexion</a>
-        <a href="profil.php " aria-current="page">Profil</a>
+        <?php
+        inject_profil_button("./");
+        ?>
       </nav>
     </div>
   </header>
@@ -63,7 +65,7 @@
 
       <hr class="divider">
 
-      <button class="btn" id="logout" type="button"><a class="btn" href="logout.php?redirect=1&location=./index.php">Se déconnecter</a></button>
+      <a class="btn" href="logout.php?redirect=1&location=./index.php">Se déconnecter</a>
     </div>
   </main>
   <footer class="site-footer">

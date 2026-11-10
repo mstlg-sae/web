@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("./../function/php_lib.php");
-profil_page_onlogged("")
+profil_page_onlogged("");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,7 +28,7 @@ profil_page_onlogged("")
   </header>
   <main>
     <div class="conteneur">
-      <form class="formulaire" action="signup.php" method="post">
+      <form class="formulaire" action="signup-action.php" method="post">
         <p class="etiquette">Nouveau joueur</p>
         <h1>Inscription.</h1>
         <div class="champ">

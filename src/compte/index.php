@@ -21,8 +21,9 @@ profil_page_onlogged("");
       <nav>
         <a href="./../index.html">Accueil</a>
         <a href="./../jeux/index.html">Jeux</a>
-        <a href="index.php" class="actif">Connexion</a>
-        <a href="profil.php">Profil</a>
+        <?php
+        inject_profil_button("./");
+        ?>
       </nav>
     </div>
   </header>
