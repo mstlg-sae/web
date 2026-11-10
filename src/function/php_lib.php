@@ -107,7 +107,7 @@ function right_profil_page($login_page_location,$role_required){
             header("Location: " . $login_page_location."adminsys.php");
         } elseif ($_SESSION['role'] == 'adminweb' && $role_required != 'adminweb'){
             header("Location: " . $login_page_location."adminweb.php");
-        } else{
+        } elif($_SESSION['role'] == 'adminweb' && $role_required != 'user'){
             header("Location: " . $login_page_location."profil.php");
             
         }
