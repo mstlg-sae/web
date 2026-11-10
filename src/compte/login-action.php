@@ -17,7 +17,6 @@ if (isset($_POST["mdp"])&& isset($_POST["login"])){
             if ($actual_user[0] == $login && $actual_user[1] == $password_hash) {
                 session_start();
                 $_SESSION["login"] = $login;
-                $_SESSION["password"] = md5($password_hash);
                 break;
             }
         }
