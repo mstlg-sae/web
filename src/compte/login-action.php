@@ -10,8 +10,8 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
         if ($db){
             $login = mysqli_real_escape_string($connect, $_POST["login"]);
             $password_hash = md5($_POST["mdp"]);
-            $sql_request = "SELECT * FROM ".$table_user." WHERE login='".$login."' AND password='".$password_hash."'";
-            $sql_request_role = "SELECT role from ".$table_role." WHERE login='".$login."'";
+            $sql_request = "SELECT * FROM ".$table_user." WHERE username='".$login."' AND password='".$password_hash."'";
+            $sql_request_role = "SELECT role from ".$table_role." WHERE username='".$login."'";
             $rq = mysqli_query($connect, $sql_request);
             $rq_role = mysqli_query($connect, $sql_request_role);
             echo "DEBUG rq="; var_dump($rq);
