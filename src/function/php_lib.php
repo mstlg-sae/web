@@ -1,4 +1,5 @@
 <?php
+mysqli_report(MYSQLI_REPORT_OFF);
 function display($a) {
 	echo "<pre>";
 	print_r($a);
@@ -68,6 +69,7 @@ function is_logged_redirect($login_page_location){
     # $login_page_location = Position de la page de connection par rapport à l'appel de la fonciton
     if (session_status() != PHP_SESSION_ACTIVE){
         header("Location:".$login_page_location);
+        exit;
     }
 }
 ?>

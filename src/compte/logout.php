@@ -11,6 +11,7 @@ if (isset($_GET['redirect']) && $_GET['redirect'] == TRUE) {
         $location = "./../index.html";
     }
     header("location: ".$location);
+    exit;
 }
 
 ?>
