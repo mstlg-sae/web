@@ -94,5 +94,25 @@ function profil_page_onlogged($login_page_location){
         exit;
     }
 }
+function right_profil_page($login_page_location,$role_required){
+    # Fonction qui regarder si la page de compte sur laquelle est actuellement l'utilisateur correspond bien à son rôle
+    # Si n'est pas le cas renvoie sur la page de base du compte
+    # INPUT
+    # $login_page_location = Position du dossier de compte du site
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (isset($_SESSION['login']) && isset($_SESSION['role'])) {
+        if ($_SESSION['role'] == 'adminsys' && $role_required != 'adminsys'){
+            header("Location: " . $login_page_location."adminsys.php");
+        } elseif ($_SESSION['role'] == 'adminweb' && $role_required != 'adminweb'){
+            header("Location: " . $login_page_location."adminweb.php");
+        } else{
+            header("Location: " . $login_page_location."profil.php");
+            
+        }
+        exit;
+    }
+}
 ?>
 

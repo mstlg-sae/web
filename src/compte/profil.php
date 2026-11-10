@@ -34,7 +34,7 @@
       <hr class="divider">
 
       <p class="label">Joueur connecté</p>
-      <p class="player" id="pseudo"><?php echo htmlspecialchars($_SESSION['login'])?>%</p>
+      <p class="player" id="pseudo"><?php echo htmlspecialchars($_SESSION['login'])?></p>
       <p class="note_player" class="note-player">NOTE : Cette page n'est censé être visible que pour les utilisateur connectées</p>
       <hr class="divider">
 
