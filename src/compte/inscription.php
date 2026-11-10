@@ -1,3 +1,8 @@
+<?php
+session_start();
+include("./../function/php_lib.php");
+profil_page_onlogged("")
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,16 +28,12 @@
   </header>
   <main>
     <div class="conteneur">
-      <form class="formulaire" action="#" method="post">
+      <form class="formulaire" action="signup.php" method="post">
         <p class="etiquette">Nouveau joueur</p>
         <h1>Inscription.</h1>
         <div class="champ">
           <label for="pseudo">Pseudo</label>
           <input type="text" id="pseudo" name="pseudo">
-        </div>
-        <div class="champ">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email">
         </div>
         <div class="champ">
           <label for="mdp">Mot de passe</label>

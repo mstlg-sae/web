@@ -75,5 +75,24 @@ function is_logged_redirect($login_page_location){
         exit;
     }
 }
+function profil_page_onlogged($login_page_location){
+    # Fonction qui renvoie sur la page de compte si l'utilisateur est connectée, 
+    # INPUT
+    # $login_page_location = Position du dossier de compte du site
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (isset($_SESSION['login'] && isset($_SESSION['role']))) {
+        if ($_SESSION['role'] == 'adminsys'){
+            header("Location: " . $login_page_location."adminsys.php");
+        } elseif ($_SESSION['role'] == 'adminweb'){
+            header("Location: " . $login_page_location."adminweb.php");
+        } else{
+            header("Location: " . $login_page_location."profil.php");
+            
+        }
+        exit;
+    }
+}
 ?>
 

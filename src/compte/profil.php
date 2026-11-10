@@ -21,8 +21,8 @@
       <nav class="nav" aria-label="Navigation principale">
         <a href="./../index.html">Accueil</a>
         <a href="./../jeux/index.html">Jeux</a>
-        <a href="index.html">Connexion</a>
-        <a href="profil.html" aria-current="page">Profil</a>
+        <a href="index.php">Connexion</a>
+        <a href="profil.php " aria-current="page">Profil</a>
       </nav>
     </div>
   </header>
