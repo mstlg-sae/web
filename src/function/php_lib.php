@@ -17,6 +17,7 @@ function connecter_debug($host=NULL, $user=NULL, $pass=NULL){
         $connection = @mysqli_connect($host, $user, $pass);
     }
     if ($connection){
+        mysqli_set_charset($connection, "utf8mb4");
         echo "<p>Connexion réussi</p>";
         echo "<p>Informatiqn sur le serveur".mysqli_get_host_info($connection)." </p>";
         echo "<p>Version du serveur : <b>".mysqli_get_server_info($connection)."</b></p>";
@@ -27,7 +28,7 @@ function connecter_debug($host=NULL, $user=NULL, $pass=NULL){
         echo "<p>numéro de l'erreur ".mysqli_connect_errno()."</p>";
         echo "<p>erreur : ".mysqli_connect_error()."</p>";
     }
-    mysqli_set_charset($connection, "utf8mb4");
+    
     return $connection;
 }
 function disconnect_debug($connection=NULL){
@@ -55,7 +56,10 @@ function connecter($host=NULL, $user=NULL, $pass=NULL){
     else{
         $connection = @mysqli_connect($host, $user, $pass);
     }
-    mysqli_set_charset($connection, "utf8mb4");
+    if ($connection){
+        mysqli_set_charset($connection, "utf8mb4");
+    }
+   
     return $connection;
 }
 function is_logged_redirect($login_page_location){
