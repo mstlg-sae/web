@@ -30,7 +30,12 @@ if (isset($_POST["mdp"] && $_POST["login"])){
                 if (isset($_SESSION['role'])){
                     # Note j'utilise $actual_role car les deux sont les meme et c'ets plus facile a écrire
                     if ($actual_role=='adminsys')
+                        header("Location: adminsys.php");
+                    elseif ($actual_role=='adminweb'){
+                        header("Location: adminweb.php");
+                    } else {
                         header("Location: profil.php");
+                    }
                 }
             } else {
                 # cas de l'echec du chargement du rôle, on deconnect puis renvoie erreur sur la page de connection ( Connection incomplète )
