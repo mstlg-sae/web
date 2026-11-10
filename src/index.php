@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("./../function/php_lib.php");
+include("./function/php_lib.php");
 profil_page_onlogged("");
 ?>
 <!DOCTYPE html>
