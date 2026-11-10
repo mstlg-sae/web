@@ -22,7 +22,7 @@ profil_page_onlogged("");
         <a href="index.php" class="actif">Accueil</a>
         <a href="./jeux/index.php">Jeux</a>
         <?php
-        inject_profil_button("./");
+        inject_profil_button("./compte/");
         ?>
         
       </nav>
