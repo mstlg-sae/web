@@ -42,6 +42,15 @@ function disconnect($connection){
         echo "<p>Erreur lors de la connexion, la connexion n'existe pas</p>";
     }
 }
+function silent_connecter($host=NULL, $user=NULL, $pass=NULL){
+    if (func_num_args()==0){
+        $connection = @mysqli_connect();
+    }
+    else{
+        $connection = @mysqli_connect($host, $user, $pass);
+    }
+    return $connection;
+}
 function is_logged_redirect($login_page_location){
     # Fonction qui renvoie sur la page de connection si l'utilisateur n'est pas connecter, 
     # INPUT
