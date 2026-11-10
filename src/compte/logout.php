@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 session_destroy();
 # option de redirection si besoin pour les deconnection
 if (isset($_GET['redirect']) && $_GET['redirect'] == TRUE) {
