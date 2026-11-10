@@ -67,8 +67,11 @@ function is_logged_redirect($login_page_location){
     # Fonction qui renvoie sur la page de connection si l'utilisateur n'est pas connecter, 
     # INPUT
     # $login_page_location = Position de la page de connection par rapport à l'appel de la fonciton
-    if (session_status() != PHP_SESSION_ACTIVE){
-        header("Location:".$login_page_location);
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (!isset($_SESSION['login'])) {
+        header("Location: " . $login_page_location);
         exit;
     }
 }

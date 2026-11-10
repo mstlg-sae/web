@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("./../function/php_lib.php");
 if (isset($_POST["mdp"]) && isset($_POST["login"])){
     $base = "sae";
@@ -19,7 +20,6 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
             echo "DEBUG num_rows="; var_dump(mysqli_num_rows($rq));
             $actual_user = $rq ? mysqli_fetch_row($rq) : NULL;
             if ($actual_user != NULL){
-                session_start();
                 $_SESSION["login"] = $login;
                 $actual_role = $rq_role ? mysqli_fetch_row($rq_role) : NULL;
                 if ($actual_role != NULL){
