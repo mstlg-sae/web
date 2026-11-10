@@ -9,10 +9,10 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
     $sql_request = "SELECT * FROM ".$table_user." WHERE login='".$login."' AND password='".$password_hash."'";
     $sql_request_role = "SELECT role from ".$table_role." WHERE login='".$login."'";
     $connect = connecter("localhost","root","!sae26!");
-    $db = mysqli_select_db($connect, $base);
-    $rq = mysqli_query($connect, $sql_request);
-    $rq_role = mysqli_query($connect, $sql_request_role);
     if ($db){
+        $db = mysqli_select_db($connect, $base);
+        $rq = mysqli_query($connect, $sql_request);
+        $rq_role = mysqli_query($connect, $sql_request_role);
         while ($actual_user = mysqli_fetch_row($rq)) {
             if ($actual_user[0] == $login && $actual_user[1] == $password_hash) {
                 session_start();
