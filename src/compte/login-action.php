@@ -8,7 +8,7 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
     $password_hash = md5($_POST["mdp"]);
     $sql_request = "SELECT * FROM ".$table_user." WHERE login='".$login."' AND password='".$password_hash."'";
     $sql_request_role = "SELECT role from ".$table_role." WHERE login='".$login."'";
-    $connect = silent_connecter("localhost","root","");
+    $connect = connecter("localhost","root","!sae26!");
     $db = mysqli_select_db($connect, $base);
     $rq = mysqli_query($connect, $sql_request);
     $rq_role = mysqli_query($connect, $sql_request_role);
@@ -29,10 +29,13 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
                     # Note j'utilise $actual_role car les deux sont les meme et c'ets plus facile a écrire
                     if ($actual_role[0]=='adminsys')
                         header("Location: adminsys.php");
+                        exit;
                     elseif ($actual_role[0]=='adminweb'){
                         header("Location: adminweb.php");
+                        exit;
                     } else {
                         header("Location: profil.php");
+                        exit;
                     }
                 }
             } else {
@@ -41,14 +44,17 @@ if (isset($_POST["mdp"]) && isset($_POST["login"])){
                 include("./logout.php");
                 # renvoie page de connection avec erreur dédié
                 header("Location: index.php?error=no_role");
+                exit;
             }
         } else {
             disconnect($connect);
             header("Location: index.php?error=wrong_login");
+            exit;
         }
         
     } else {
         header("Location: index.php?error=no_db_available");
+        exit;
     }
 } else {
     header("Location: index.php?error=".$_POST["mdp"].$_POST["login"]);

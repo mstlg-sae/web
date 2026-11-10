@@ -9,7 +9,7 @@ function dump($a) {
 	var_dump($a);
 	echo "</pre>";
 }
-function connecter($host=NULL, $user=NULL, $pass=NULL){
+function connecter_debug($host=NULL, $user=NULL, $pass=NULL){
     if (func_num_args()==0){
         $connection = @mysqli_connect();
     }
@@ -27,9 +27,10 @@ function connecter($host=NULL, $user=NULL, $pass=NULL){
         echo "<p>numéro de l'erreur ".mysqli_connect_errno()."</p>";
         echo "<p>erreur : ".mysqli_connect_error()."</p>";
     }
+    mysqli_set_charset($connection, "utf8mb4")
     return $connection;
 }
-function disconnect($connection){
+function disconnect_debug($connection=NULL){
     if ($connection){
         $ok = mysqli_close($connection);
         if ($ok){
@@ -42,13 +43,19 @@ function disconnect($connection){
         echo "<p>Erreur lors de la connexion, la connexion n'existe pas</p>";
     }
 }
-function silent_connecter($host=NULL, $user=NULL, $pass=NULL){
+function disconnect($connection=NULL){
+    if ($connection){
+        $ok = mysqli_close($connection);
+    }
+}
+function connecter($host=NULL, $user=NULL, $pass=NULL){
     if (func_num_args()==0){
         $connection = @mysqli_connect();
     }
     else{
         $connection = @mysqli_connect($host, $user, $pass);
     }
+    mysqli_set_charset($connection, "utf8mb4")
     return $connection;
 }
 function is_logged_redirect($login_page_location){
