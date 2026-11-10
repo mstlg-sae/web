@@ -1,26 +1,25 @@
 <?php
 include("./../function/php_lib.php");
 if (isset($_POST["mdp"] && $_POST["login"])){
+    $base = "sae";
+    $table_user = "Users";
+    $table_role = "role";
     $login = $_POST["login"];
     $password_hash = md5($_POST["mdp"]);
-    $sql_request = "SELECT * FROM USERS WHERE login='".$login."' AND password='".$password_hash."'"
-    $sql_request_role = "SELECT role from ROLE WHERE login=".$login
+    $sql_request = "SELECT * FROM".$table_user." WHERE login='".$login."' AND password='".$password_hash."'";
+    $sql_request_role = "SELECT role from ".$table_role." WHERE login=".$login;
     $connect = connecter("localhost","root","");
-    $base = "site";
-    $table = "users";
     $db = mysqli_select_db($connect, $base);
     $rq = mysqli_query($connect, $sql_request);
     $rq_role = mysqli_query($connect, $sql_request);
     if ($db){
         while ($actual_user = mysqli_fetch_row($rq)) {
             echo "<br>";
-            if ($actual_user[0] == $login && $actual_user[1] == $password) {
+            if ($actual_user[0] == $login && $actual_user[1] == $password_hash) {
                 session_start();
                 $_SESSION["login"] = $login;
-                $_SESSION["password"] = md5($password);
-                
-            } else {
-                continue;
+                $_SESSION["password"] = md5($password_hash);
+                break;
             }
         }
         if (session_status == PHP_SESSION_ACTIVE){
