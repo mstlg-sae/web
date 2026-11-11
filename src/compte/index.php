@@ -62,7 +62,7 @@ profil_page_onlogged("");
           echo "Vous devez être connecté pour accèder à cette page" ;
         } else {
           // erreur générique
-          echo "Un erreur lors de la connexion est survenu";
+          echo "Un erreur lors de la connection est survenu";
         }
         echo "</p><br><p class='error_code'>Code de l'erreur : '".$_GET['error']."'</p></div>";
       }

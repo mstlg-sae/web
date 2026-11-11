@@ -1,11 +1,5 @@
 <?php
 mysqli_report(MYSQLI_REPORT_OFF);
-# -----
-# Variable global de tables et de bdd
-$base = "sae";
-$table_user = "Users";
-$table_role = "role";
-# -----
 function display($a) {
 	echo "<pre>";
 	print_r($a);
@@ -94,10 +88,10 @@ function inject_profil_button($compte_location){
         }
         
     } else {
-        $text = 'Connexion';
+        $text = 'Connection';
         $page = $compte_location.'index.php';
     }
-    echo "<a href='".$page."' class='actif'>".$text."</a>";
+    echo "<a href='".$page."'>".$text."</a>";
 }
 function is_logged_redirect($login_page_location){
     # Fonction qui renvoie sur la page de connection si l'utilisateur n'est pas connecter, 
