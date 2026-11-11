@@ -33,20 +33,45 @@ profil_page_onlogged("");
         <p class="etiquette">Nouveau joueur</p>
         <h1>Inscription.</h1>
         <div class="champ">
-          <label for="pseudo">Pseudo</label>
-          <input type="text" id="pseudo" name="pseudo">
+          <label for="login">Pseudo (login)</label>
+          <input type="text" id="login" name="login" required>
         </div>
         <div class="champ">
           <label for="mdp">Mot de passe</label>
-          <input type="password" id="mdp" name="mdp">
+          <input type="password" id="mdp" name="mdp" required>
         </div>
         <div class="champ">
-          <label for="mdp2">Confirmer le mot de passe</label>
-          <input type="password" id="mdp2" name="mdp2">
+          <label for="mdp_repeat">Confirmer le mot de passe</label>
+          <input type="password" id="mdp_repeat" name="mdp_repeat" required>
         </div>
         <button class="bouton" type="submit" style="width:100%">Créer mon compte →</button>
         <p class="bas">Déjà un compte ? <a href="index.php">Se connecter</a></p>
       </form>
+      <?php
+      
+      if(isset($_GET['error'])){
+        echo "<div class='error'><p class='error_text'>";
+        if ($_GET['error']=="password_not_same") {
+          // affichage d'un message d'erreur dans le cas si les champs de mot de passe ne corresponde pas
+          echo "Les mots de passes choisi ne sont pas les même, réesayé en tapant les même mot de passe.";
+        } elseif ($_GET['error']=="no_request") {
+          // affichage d'un message d'erreur en cas de requètes d'authentification invalide
+          // -> connection effectué mais requète invalide
+          echo "Les champs de nom d'utilisateur et de mot de passe doivent être fournis pour s'incrire.";
+        }elseif ($_GET['error']=="login_already_used"){
+          // Erreur dans le cas ou le nom d'utilisateur est déjà utilisée
+          echo "Ce nom d'utilisateur est déjà utiliser, choissisez - en un autre." ;
+        }elseif ($_GET['error']=="weak_password"){
+          // affichage d'un message d'erreur en cas de requètes d'authentification vide
+          // -> tentative d'accès à un page pour personne connecté sans connection
+          echo "Le mot de passe choisi n'est pas assez sécurisé, choissisez en un autre" ;
+        } else {
+          // erreur générique
+          echo "Un erreur lors de l'inscription est survenu";
+        }
+        echo "</p><br><p class='error_code'>Code de l'erreur : '".$_GET['error']."'</p></div>";
+      }
+      ?>
     </div>
   </main>
   <footer>
