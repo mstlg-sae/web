@@ -56,6 +56,10 @@ profil_page_onlogged("");
         }elseif ($_GET['error']=="no_role"){
           // Erreur en cas d'acquisition du rôle lors de la connection
           echo "Le rôle n'a pas pu être charger lors la connection, veuillez contacter un administrateur" ;
+        }elseif ($_GET['error']=="no_db_available"){
+          // affichage d'un message d'erreur en cas de requètes d'authentification vide
+          // -> tentative d'accès à un page pour personne connecté sans connection
+          echo "La Base de données est en erreur, veuillez contacter un administrateur" ;
         }elseif ($_GET['error']=="no_session"){
           // affichage d'un message d'erreur en cas de requètes d'authentification vide
           // -> tentative d'accès à un page pour personne connecté sans connection
