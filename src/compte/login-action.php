@@ -2,9 +2,6 @@
 session_start();
 include("./../function/php_lib.php");
 if (isset($_POST["mdp"]) && isset($_POST["login"])){
-    $base = "sae";
-    $table_user = "Users";
-    $table_role = "role";
     $connect = connecter("localhost","root","!sae26!");
     if ($connect){
         $db = mysqli_select_db($connect, $base);
