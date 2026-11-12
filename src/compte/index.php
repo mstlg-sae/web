@@ -56,15 +56,27 @@ profil_page_onlogged("");
         }elseif ($_GET['error']=="no_role"){
           // Erreur en cas d'acquisition du rôle lors de la connection
           echo "Le rôle n'a pas pu être charger lors la connection, veuillez contacter un administrateur" ;
+        }elseif ($_GET['error']=="no_db_available"){
+          // affichage d'un message d'erreur en cas de requètes d'authentification vide
+          // -> tentative d'accès à un page pour personne connecté sans connection
+          echo "La Base de données est en erreur, veuillez contacter un administrateur" ;
         }elseif ($_GET['error']=="no_session"){
           // affichage d'un message d'erreur en cas de requètes d'authentification vide
           // -> tentative d'accès à un page pour personne connecté sans connection
           echo "Vous devez être connecté pour accèder à cette page" ;
         } else {
           // erreur générique
-          echo "Un erreur lors de la connection est survenu";
+          echo "Un erreur lors de la connexion est survenu";
         }
         echo "</p><br><p class='error_code'>Code de l'erreur : '".$_GET['error']."'</p></div>";
+      }
+      if(isset($_GET['info'])) {
+        echo "<div class='info'><p class='info_text'>";
+        if ($_GET['info']=="sucess_signup") {
+          // affichage d'un message d'erreur en cas d'identifiant invalide
+          echo "L'utilisateur à été créer, connecter-vous avec les identifiant pour continuer";
+        }
+        echo "</p></div>";
       }
       ?>
     </div>
