@@ -9,6 +9,7 @@ if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"]
             $db = mysqli_select_db($connect, $base);
             if ($db) {
                 # Preparation de requète de check, et les requète d'insertion d'utilisateur et de son roel
+                $login = trim($_POST["login"]);
                 $password_hash = md5($_POST["mdp"]);
                 # requète de check si l'utilisateur n'existe pas
                 $sql_request = "SELECT COUNT(username) FROM ".$table_user." WHERE username= ?;";
@@ -23,7 +24,7 @@ if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"]
                 $statment_create_user_role = $connect->prepare($sql_request_create_user_role);
                 $statment_create_user_role -> bind_param("ss",$login,$base_role_signup);
                 # Execution de requète dit de check
-                mysqli_stmt_execute($statment_check); 
+                mysqli_stmt_execute($statment_check);
                 $result = mysqli_stmt_get_result($statment_check);
                 if ($result == false) {
                     disconnect($connect);
@@ -31,25 +32,28 @@ if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"]
                     exit;
                 }
                 $check_login = $result->fetch_row();
+                # transaction pour que un compte ne soit pas bloqué
+                
                 if ($check_login != NULL){
                     if ($check_login[0]==0){
                         # creation de l'utilisateur
-                        mysqli_stmt_execute($statment_create_user);
-                        $result_create_user = mysqli_stmt_get_result($statment_create_user);
-                        if ($result_create_user==TRUE){
-                            mysqli_stmt_execute($statment_create_user_role);
-                            $result_create_user_role = mysqli_stmt_get_result($statment_create_user_role);
-                            if ($result_create_user_role){
+                        $connect->begin_transaction();
+                        if ($statment_create_user->execute()){
+                            if ($statment_create_user_role->execute()){
                                 # success
+                                $connect->commit(); 
                                 disconnect($connect);
                                 header("Location: index.php?info=sucess_signup");
                                 exit;
                             } else {
+                                # cas creation user ok mais role non
+                                $connect->rollback();
                                 disconnect($connect);
                                 header("Location: inscription.php?error=fatal_error_db");
                                 exit; 
                             }
                         } else {
+                            $connect->rollback();
                             disconnect($connect);
                             header("Location: inscription.php?error=error_db");
                             exit;
@@ -60,10 +64,12 @@ if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"]
                         exit; 
                     }
                 } else {
+                    disconnect($connect);
                     header("Location: inscription.php?error=no_db_available");
                     exit;   
                 }
             } else {
+                disconnect($connect);
                 header("Location: inscription.php?error=no_db_available");
                 exit;
             }
