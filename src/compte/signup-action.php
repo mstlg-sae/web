@@ -1,25 +1,44 @@
 <?php
 session_start();
 include("./../function/php_lib.php");
-profil_page_onlogged("");
+profil_page_onlogged("./");
 if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"])){
     if ($_POST["mdp_repeat"] == $_POST["mdp"]) {
         $connect = connecter("localhost","root","!sae26!");
         if ($connect){
             $db = mysqli_select_db($connect, $base);
             if ($db) {
-                $login = mysqli_real_escape_string($connect, $_POST["login"]); # fix faille sql
+                # Preparation de requète de check, et les requète d'insertion d'utilisateur et de son roel
                 $password_hash = md5($_POST["mdp"]);
-                $sql_request = "SELECT COUNT(USERNAME) FROM ".$table_user." WHERE username='".$login."';";
-                $sql_request_create_user = "INSERT INTO ".$table_user." (`username`, `password`) VALUES (".$login.", ".$password_hash.");";
-                $sql_request_create_user_role = "INSERT INTO ".$table_role." (`username`, `role`) VALUES (".$login.", ".$base_role_signup.");";
-                $rq = mysqli_query($connect, $sql_request);
-                $check_login = $rq ? mysqli_fetch_row($rq) : NULL;
+                # requète de check si l'utilisateur n'existe pas
+                $sql_request = "SELECT COUNT(username) FROM ".$table_user." WHERE username= ?;";
+                $statment_check = $connect->prepare($sql_request);
+                $statment_check -> bind_param("s",$login);
+                # Requète de création d'utilisateur
+                $sql_request_create_user = "INSERT INTO ".$table_user." (`username`, `password`) VALUES (?,?);";
+                $statment_create_user = $connect->prepare($sql_request_create_user);
+                $statment_create_user -> bind_param("ss",$login,$password_hash);
+                # Requète de création de rôle à l'utilisateur
+                $sql_request_create_user_role = "INSERT INTO ".$table_role." (`username`, `role`) VALUES (?,?);";
+                $statment_create_user_role = $connect->prepare($sql_request_create_user_role);
+                $statment_create_user_role -> bind_param("ss",$login,$base_role_signup);
+                # Execution de requète dit de check
+                mysqli_stmt_execute($statment_check); 
+                $result = mysqli_stmt_get_result($statment_check);
+                if ($result === false) {
+                    disconnect($connect);
+                    header("Location: inscription.php?error=no_db_available");
+                    exit;
+                }
+                $check_login = $result->fetch_row();
                 if ($check_login != NULL){
                     if ($check_login[0]==0){
+                        # creation de l'utilisateur
                         echo 'good';
                     } else {
-                       header("Location: inscription.php?error=login_already_used"); 
+                        disconnect($connect);
+                        header("Location: inscription.php?error=login_already_used");
+                        exit; 
                     }
                 } else {
                     header("Location: inscription.php?error=no_db_available");
