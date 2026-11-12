@@ -5,6 +5,7 @@ mysqli_report(MYSQLI_REPORT_OFF);
 $base = "sae";
 $table_user = "Users";
 $table_role = "role";
+$base_role_signup = "user";
 # -----
 function display($a) {
 	echo "<pre>";
