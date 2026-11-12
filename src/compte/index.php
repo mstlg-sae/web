@@ -70,6 +70,14 @@ profil_page_onlogged("");
         }
         echo "</p><br><p class='error_code'>Code de l'erreur : '".$_GET['error']."'</p></div>";
       }
+      if(isset($_GET['info'])) {
+        echo "<div class='info'><p class='info_text'>";
+        if ($_GET['info']=="sucess_signup") {
+          // affichage d'un message d'erreur en cas d'identifiant invalide
+          echo "L'utilisateur à été créer, connecter-vous avec les identifiant pour continuer";
+        }
+        echo "</p></div>";
+      }
       ?>
     </div>
   </main>

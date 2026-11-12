@@ -58,6 +58,12 @@ profil_page_onlogged("");
           // affichage d'un message d'erreur en cas de requètes d'authentification invalide
           // -> connection effectué mais requète invalide
           echo "Les champs de nom d'utilisateur et de mot de passe doivent être fournis pour s'incrire.";
+        }elseif ($_GET['error']=="error_db") {
+          // Affichage d'un message en cas d'erreur de la base de données
+          echo "Un erreur au niveau de la base de données est survenu.";
+        }elseif ($_GET['error']=="fatal_error_db") {
+          // Affichage d'un message en cas d'erreur de la base de données (erreur de role non mis sur la bdd -> connexion impossible)
+          echo "Un erreur au niveau de la base de données est survenu. Cette erreur rend impossible la finalisation de la création du compte, veuillez contacter les administrateur.";
         }elseif ($_GET['error']=="login_already_used"){
           // Erreur dans le cas ou le nom d'utilisateur est déjà utilisée
           echo "Ce nom d'utilisateur est déjà utiliser, choissisez - en un autre." ;
