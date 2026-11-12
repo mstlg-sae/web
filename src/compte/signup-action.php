@@ -25,7 +25,7 @@ if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"]
                 # Execution de requète dit de check
                 mysqli_stmt_execute($statment_check); 
                 $result = mysqli_stmt_get_result($statment_check);
-                if ($result === false) {
+                if ($result == false) {
                     disconnect($connect);
                     header("Location: inscription.php?error=error_db");
                     exit;
@@ -36,7 +36,7 @@ if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"]
                         # creation de l'utilisateur
                         mysqli_stmt_execute($statment_create_user);
                         $result_create_user = mysqli_stmt_get_result($statment_create_user);
-                        if ($result_create_user){
+                        if ($result_create_user==TRUE){
                             mysqli_stmt_execute($statment_create_user_role);
                             $result_create_user_role = mysqli_stmt_get_result($statment_create_user_role);
                             if ($result_create_user_role){
@@ -54,7 +54,6 @@ if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"]
                             header("Location: inscription.php?error=error_db");
                             exit;
                         }
-                        
                     } else {
                         disconnect($connect);
                         header("Location: inscription.php?error=login_already_used");
