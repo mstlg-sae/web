@@ -33,7 +33,7 @@ profil_page_onlogged("");
         <p class="etiquette">Nouveau joueur</p>
         <h1>Inscription.</h1>
         <div class="champ">
-          <label for="login">Pseudo (login)</label>
+          <label for="login">Email (login)</label>
           <input type="text" id="login" name="login" required>
         </div>
         <div class="champ">
