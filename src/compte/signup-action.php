@@ -3,11 +3,18 @@ session_start();
 include("./../function/php_lib.php");
 profil_page_onlogged("./");
 if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"])){
+    if(filter_var($_POST["login"], FILTER_VALIDATE_EMAIL)==false){
+        header("Location: inscription.php?error=no_email");
+        exit;
+    }
     if ($_POST["mdp_repeat"] == $_POST["mdp"]) {
-        $connect = connecter("localhost","root","!sae26!");
-        if ($connect){
-            $db = mysqli_select_db($connect, $base);
-            if ($db) {
+        # taille du mot de passe superieur a 8 caracteres
+        if (secure_password_check($_POST["mdp"])==1){
+
+            $connect = connecter("localhost","root","!sae26!");
+            if ($connect){
+                $db = mysqli_select_db($connect, $base);
+                if ($db) {
                 # Preparation de requète de check, et les requète d'insertion d'utilisateur et de son roel
                 $login = trim($_POST["login"]);
                 $password_hash = md5($_POST["mdp"]);
@@ -68,15 +75,20 @@ if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"]
                     header("Location: inscription.php?error=no_db_available");
                     exit;   
                 }
+                } else {
+                    disconnect($connect);
+                    header("Location: inscription.php?error=no_db_available");
+                    exit;
+                }
             } else {
-                disconnect($connect);
                 header("Location: inscription.php?error=no_db_available");
                 exit;
             }
         } else {
-            header("Location: inscription.php?error=no_db_available");
+            header("Location: inscription.php?error=weak_password");
             exit;
         }
+        
     } else {
         header("Location: inscription.php?error=password_not_same");
         exit;

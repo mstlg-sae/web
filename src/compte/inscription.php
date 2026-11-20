@@ -61,6 +61,9 @@ profil_page_onlogged("");
         }elseif ($_GET['error']=="error_db") {
           // Affichage d'un message en cas d'erreur de la base de données
           echo "Un erreur au niveau de la base de données est survenu.";
+        }elseif ($_GET['error']=="no_email") {
+          // Affichage d'un message en cas d'email non present dans la requete
+          echo "Le login n'est pas un email, donner un email synxtaxiquement valide pour continuer.";
         }elseif ($_GET['error']=="fatal_error_db") {
           // Affichage d'un message en cas d'erreur de la base de données (erreur de role non mis sur la bdd -> connexion impossible)
           echo "Un erreur au niveau de la base de données est survenu. Cette erreur rend impossible la finalisation de la création du compte, veuillez contacter les administrateur.";
@@ -70,7 +73,7 @@ profil_page_onlogged("");
         }elseif ($_GET['error']=="weak_password"){
           // affichage d'un message d'erreur en cas de requètes d'authentification vide
           // -> tentative d'accès à un page pour personne connecté sans connection
-          echo "Le mot de passe choisi n'est pas assez sécurisé, choissisez en un autre" ;
+          echo "Le mot de passe choisi n'est pas assez sécurisé, choissisez en un autre, le mot de passe doit contenir une Majuscule, une minuscule et un nombre" ;
         } else {
           // erreur générique
           echo "Un erreur lors de l'inscription est survenu";

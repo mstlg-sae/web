@@ -149,5 +149,12 @@ function right_profil_page($login_page_location, $role_required){
         exit;
     }
 }
+function secure_password_check(string $chaine): bool
+{
+    return preg_match('/[A-Z]/', $chaine) === 1
+        && preg_match('/[0-9]/', $chaine) === 1
+        && preg_match('/[a-z]/', $chaine) === 1
+        && strlen($chaine)>8;
+}
 ?>
 
