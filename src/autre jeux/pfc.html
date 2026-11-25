@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pierre Feuille Ciseau</title>
+<style>
+  :root {
+    --bg1: #1a1a2e;
+    --bg2: #16213e;
+    --bg3: #0f3460;
+    --accent: #e94560;
+    --accent2: #533483;
+    --text: #eaeaea;
+    --glass: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: var(--text);
+    padding: 20px;
+    overflow-x: hidden;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .game {
+    width: 100%;
+    max-width: 640px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 32px 28px 36px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    text-align: center;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    background: linear-gradient(90deg, #e94560, #f5a623, #e94560);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+  }
+
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.6;
+    margin-bottom: 26px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 26px;
+    flex-wrap: wrap;
+  }
+
+  .score-card {
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 12px 10px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .score-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(233, 69, 96, 0.2);
+  }
+
+  .score-card .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0.6;
+  }
+
+  .score-card .value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-top: 2px;
+  }
+
+  .score-card.player .value { color: #4ade80; }
+  .score-card.computer .value { color: #e94560; }
+
+  .arena {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 26px;
+  }
+
+  .choice-display {
+    flex: 1;
+    aspect-ratio: 1;
+    max-width: 150px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(3rem, 12vw, 4.5rem);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  }
+
+  .choice-display.pop {
+    animation: pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+  }
+
+  .vs {
+    font-size: 1.1rem;
+    font-weight: 800;
+    opacity: 0.5;
+    letter-spacing: 2px;
+  }
+
+  .result {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    min-height: 32px;
+    margin-bottom: 24px;
+    transition: color 0.3s ease;
+  }
+
+  .result.win { color: #4ade80; }
+  .result.lose { color: #e94560; }
+  .result.draw { color: #f5a623; }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn-choice {
+    position: relative;
+    width: 86px;
+    height: 86px;
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text);
+    transition: all 0.25s ease;
+    overflow: hidden;
+  }
+
+  .btn-choice::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(233, 69, 96, 0.35), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .btn-choice:hover {
+    transform: translateY(-6px) scale(1.05);
+    border-color: var(--accent);
+    box-shadow: 0 12px 30px rgba(233, 69, 96, 0.35);
+  }
+
+  .btn-choice:hover::before {
+    opacity: 1;
+  }
+
+  .btn-choice:active {
+    transform: translateY(-2px) scale(0.97);
+  }
+
+  .btn-choice:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-choice span {
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .reset {
+    display: block;
+    margin: 26px auto 0;
+    padding: 10px 26px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .reset:hover {
+    background: rgba(233, 69, 96, 0.15);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 480px) {
+    .game { padding: 24px 16px 28px; }
+    .btn-choice { width: 72px; height: 72px; font-size: 1.8rem; }
+    .choice-display { max-width: 110px; }
+  }
+</style>
+</head>
+<body>
+  <main class="game">
+    <h1>Pierre Feuille Ciseau</h1>
+    <p class="subtitle">Toi contre la machine</p>
+
+    <section class="scoreboard">
+      <div class="score-card player">
+        <div class="label">Toi</div>
+        <div class="value" id="playerScore">0</div>
+      </div>
+      <div class="score-card computer">
+        <div class="label">Machine</div>
+        <div class="value" id="computerScore">0</div>
+      </div>
+    </section>
+
+    <section class="arena">
+      <div class="choice-display" id="playerChoice">❔</div>
+      <div class="vs">VS</div>
+      <div class="choice-display" id="computerChoice">❔</div>
+    </section>
+
+    <div class="result" id="result">Choisis ton coup</div>
+
+    <section class="buttons">
+      <button class="btn-choice" data-choice="pierre" aria-label="Pierre"><span>✊</span></button>
+      <button class="btn-choice" data-choice="feuille" aria-label="Feuille"><span>✋</span></button>
+      <button class="btn-choice" data-choice="ciseau" aria-label="Ciseau"><span>✌️</span></button>
+    </section>
+
+    <button class="reset" id="reset">Réinitialiser</button>
+  </main>
+
+  <script>
+    const EMOJI = { pierre: '✊', feuille: '✋', ciseau: '✌️' };
+    const BEATS = { pierre: 'ciseau', feuille: 'pierre', ciseau: 'feuille' };
+
+    const playerScoreEl = document.getElementById('playerScore');
+    const computerScoreEl = document.getElementById('computerScore');
+    const playerChoiceEl = document.getElementById('playerChoice');
+    const computerChoiceEl = document.getElementById('computerChoice');
+    const resultEl = document.getElementById('result');
+    const buttons = document.querySelectorAll('.btn-choice');
+    const resetBtn = document.getElementById('reset');
+
+    let playerScore = 0;
+    let computerScore = 0;
+    let locked = false;
+
+    function randomChoice() {
+      const keys = Object.keys(EMOJI);
+      return keys[Math.floor(Math.random() * keys.length)];
+    }
+
+    function pop(el) {
+      el.classList.remove('pop');
+      void el.offsetWidth;
+      el.classList.add('pop');
+    }
+
+    function play(player) {
+      if (locked) return;
+      locked = true;
+      buttons.forEach(b => b.disabled = true);
+
+      const computer = randomChoice();
+
+      playerChoiceEl.textContent = EMOJI[player];
+      computerChoiceEl.textContent = '❔';
+      resultEl.textContent = '...';
+      resultEl.className = 'result';
+      pop(playerChoiceEl);
+
+      setTimeout(() => {
+        computerChoiceEl.textContent = EMOJI[computer];
+        pop(computerChoiceEl);
+
+        let msg, cls;
+        if (player === computer) {
+          msg = 'Égalité !';
+          cls = 'draw';
+        } else if (BEATS[player] === computer) {
+          msg = 'Tu gagnes !';
+          cls = 'win';
+          playerScore++;
+        } else {
+          msg = 'Tu perds...';
+          cls = 'lose';
+          computerScore++;
+        }
+
+        resultEl.textContent = msg;
+        resultEl.className = 'result ' + cls;
+        playerScoreEl.textContent = playerScore;
+        computerScoreEl.textContent = computerScore;
+
+        locked = false;
+        buttons.forEach(b => b.disabled = false);
+      }, 550);
+    }
+
+    function reset() {
+      playerScore = 0;
+      computerScore = 0;
+      playerScoreEl.textContent = '0';
+      computerScoreEl.textContent = '0';
+      playerChoiceEl.textContent = '❔';
+      computerChoiceEl.textContent = '❔';
+      resultEl.textContent = 'Choisis ton coup';
+      resultEl.className = 'result';
+      locked = false;
+      buttons.forEach(b => b.disabled = false);
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => play(btn.dataset.choice));
+    });
+    resetBtn.addEventListener('click', reset);
+  </script>
+</body>
+</html>
