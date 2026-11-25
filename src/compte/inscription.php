@@ -74,6 +74,9 @@ profil_page_onlogged("");
           // affichage d'un message d'erreur en cas de requètes d'authentification vide
           // -> tentative d'accès à un page pour personne connecté sans connection
           echo "Le mot de passe choisi n'est pas assez sécurisé, choissisez en un autre, le mot de passe doit contenir une Majuscule, une minuscule et un nombre" ;
+        }elseif ($_GET['error']=="empty_login"){
+          // affichage d'un message d'erreur en cas de logins vide
+          echo "Le login ne peut pas être vide ou être uniquement composé d'espace" ;
         } else {
           // erreur générique
           echo "Un erreur lors de l'inscription est survenu";

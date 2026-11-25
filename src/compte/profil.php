@@ -64,6 +64,7 @@
       <hr class="divider">
 
       <a class="btn" href="logout.php?redirect=1&location=./index.php">Se déconnecter</a>
+      <a class="btn" href="reset_mdp.php">Changer de mot de passe</a>
     </div>
   </main>
   <footer class="site-footer">

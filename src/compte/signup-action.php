@@ -7,6 +7,11 @@ if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"]
         header("Location: inscription.php?error=no_email");
         exit;
     }
+    $login_test = trim($_POST["login"]);
+    if ($login_test === "") {
+        header("Location: inscription.php?error=empty_login");
+        exit;
+    }
     if ($_POST["mdp_repeat"] == $_POST["mdp"]) {
         # taille du mot de passe superieur a 8 caracteres
         if (secure_password_check($_POST["mdp"])==1){

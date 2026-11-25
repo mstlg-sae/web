@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("./../function/php_lib.php");
-profil_page_onlogged("");
+is_logged_redirect("./index.php?error=no_session");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
