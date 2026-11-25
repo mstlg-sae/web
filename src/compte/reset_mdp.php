@@ -87,7 +87,7 @@ is_logged_redirect("./index.php?error=no_session");
   <footer>
     <div class="conteneur">
       <span>BIT//ARCADE</span>
-      <span class="page">compte/index.php</span>
+      <span class="page">compte/reset_mdp.php</span>
     </div>
   </footer>
 </body>
