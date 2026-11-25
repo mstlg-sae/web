@@ -75,6 +75,9 @@ profil_page_onlogged("");
         if ($_GET['info']=="sucess_signup") {
           // affichage d'un message d'erreur en cas d'identifiant invalide
           echo "L'utilisateur à été créer, connecter-vous avec les identifiant pour continuer";
+        } elseif ($_GET['info']=="sucess_change_mdp") {
+          // affichage d'un message d'erreur en cas d'identifiant invalide
+          echo "Le mot de passe à été changé";
         }
         echo "</p></div>";
       }
