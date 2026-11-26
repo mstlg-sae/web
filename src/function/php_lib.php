@@ -154,7 +154,7 @@ function secure_password_check(string $chaine): bool
     return preg_match('/[A-Z]/', $chaine) === 1
         && preg_match('/[0-9]/', $chaine) === 1
         && preg_match('/[a-z]/', $chaine) === 1
-        && strlen($chaine)>8;
+        && strlen($chaine)>=8;
 }
 function email_syntax_check(string $email): bool
 {

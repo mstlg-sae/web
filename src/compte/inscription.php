@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("./../function/php_lib.php");
+include("./../function/verify_nobot.php");
 profil_page_onlogged("");
 ?>
 <!DOCTYPE html>
@@ -44,6 +45,15 @@ profil_page_onlogged("");
           <label for="mdp_repeat">Confirmer le mot de passe</label>
           <input type="password" id="mdp_repeat" name="mdp_repeat" required>
         </div>
+        <div class="champ">
+          <label for="secur">Question de securité</label>
+          <?php 
+              if(isset($_SESSION["nb1"])&& isset($_SESSION["nb2"])){
+                echo "Combien fait ".$_SESSION["nb1"]." + ".$_SESSION["nb2"];
+              }
+          ?>
+          <input type="text" id="secur" name="secur" required>
+        </div>
         <button class="bouton" type="submit" style="width:100%">Créer mon compte →</button>
         <p class="bas">Déjà un compte ? <a href="index.php">Se connecter</a></p>
       </form>
@@ -80,6 +90,9 @@ profil_page_onlogged("");
         }elseif ($_GET['error']=="space_in_login"){
           // affichage d'un message d'erreur en cas de logins vide
           echo "L'email n'est pas conforme" ;
+        }elseif ($_GET['error']=="bots"){
+          // affichage d'un message d'erreur en cas de logins vide
+          echo "La question de securité n'est pas valide" ;
         } else {
           // erreur générique
           echo "Un erreur lors de l'inscription est survenu";

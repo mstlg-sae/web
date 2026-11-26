@@ -2,6 +2,19 @@
 session_start();
 include("./../function/php_lib.php");
 profil_page_onlogged("./");
+# no bot (tkt)
+if(isset($_SESSION["nb1"]) && isset($_SESSION["nb2"]) && isset($_POST["secur"])){
+    if (!(($_SESSION["nb1"]+$_SESSION["nb2"])==$_POST["secur"])){
+        header("Location: inscription.php?error=bots");
+        exit;
+    } else {
+        unset($_SESSION["nb1"], $_SESSION["nb2"]);
+    }
+} else {
+    header("Location: inscription.php?error=no_request");
+    exit;
+}
+# inscription
 if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"])){
     $login = trim($_POST["login"]);
     if ($login !=$_POST["login"]){
@@ -25,7 +38,6 @@ if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"]
                 $db = mysqli_select_db($connect, $base);
                 if ($db) {
                 # Preparation de requète de check, et les requète d'insertion d'utilisateur et de son roel
-                $login = trim($_POST["login"]);
                 $password_hash = md5($_POST["mdp"]);
                 # requète de check si l'utilisateur n'existe pas
                 $sql_request = "SELECT COUNT(username) FROM ".$table_user." WHERE username= ?;";
