@@ -156,5 +156,17 @@ function secure_password_check(string $chaine): bool
         && preg_match('/[a-z]/', $chaine) === 1
         && strlen($chaine)>8;
 }
+function email_syntax_check(string $email): bool
+{
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+        return false;
+    }
+    $tld = strrchr($email, '.');
+    if ($tld === false) {
+        return false;
+    }
+    $tld = substr($tld, 1);  // retire le point
+    return strlen($tld) >= 2 && ctype_alpha($tld);
+}
 ?>
 

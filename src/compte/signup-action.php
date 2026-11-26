@@ -3,18 +3,22 @@ session_start();
 include("./../function/php_lib.php");
 profil_page_onlogged("./");
 if (isset($_POST["mdp"]) && isset($_POST["login"]) && isset($_POST["mdp_repeat"])){
-    if(filter_var($_POST["login"], FILTER_VALIDATE_EMAIL)==false){
+    $login = trim($_POST["login"]);
+    if ($login !=$_POST["login"]){
+        header("Location: inscription.php?error=space_in_login");
+        exit;
+    } 
+    if(email_syntax_check($_POST["login"])==false){
         header("Location: inscription.php?error=no_email");
         exit;
     }
-    $login_test = trim($_POST["login"]);
-    if ($login_test === "") {
+    if ($login === "") {
         header("Location: inscription.php?error=empty_login");
         exit;
     }
     if ($_POST["mdp_repeat"] == $_POST["mdp"]) {
         # taille du mot de passe superieur a 8 caracteres
-        if (secure_password_check($_POST["mdp"])==1){
+        if (secure_password_check($_POST["mdp"])){
 
             $connect = connecter("localhost","root","!sae26!");
             if ($connect){

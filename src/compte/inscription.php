@@ -77,6 +77,9 @@ profil_page_onlogged("");
         }elseif ($_GET['error']=="empty_login"){
           // affichage d'un message d'erreur en cas de logins vide
           echo "Le login ne peut pas être vide ou être uniquement composé d'espace" ;
+        }elseif ($_GET['error']=="space_in_login"){
+          // affichage d'un message d'erreur en cas de logins vide
+          echo "L'email n'est pas conforme" ;
         } else {
           // erreur générique
           echo "Un erreur lors de l'inscription est survenu";
